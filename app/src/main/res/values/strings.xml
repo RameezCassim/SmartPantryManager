@@ -34,4 +34,42 @@
     <string name="message_recipes">Recipe suggestions will be implemented in Phase 7.</string>
     <string name="message_settings">Settings will be implemented in Phase 9.</string>
 
+    <!-- Stage 4 -->
+    <!-- Ingredient form -->
+    <string name="add_ingredient_title">Add Ingredient</string>
+    <string name="edit_ingredient_title">Edit Ingredient</string>
+    <string name="ingredient_form_subtitle">Keep your pantry up to date.</string>
+
+    <string name="ingredient_name_label">Ingredient Name</string>
+    <string name="ingredient_name_hint">e.g. Eggs</string>
+
+    <string name="quantity_label">Quantity</string>
+    <string name="quantity_hint">e.g. 6</string>
+
+    <string name="unit_label">Measurement Unit</string>
+
+    <string name="expiry_label">Expiry Date (Optional)</string>
+    <string name="select_expiry">Select Expiry Date</string>
+    <string name="clear_expiry">Clear Date</string>
+
+    <string name="save_ingredient">Save Ingredient</string>
+    <string name="update_ingredient">Update Ingredient</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Ingredient list -->
+    <string name="delete_ingredient_title">Delete Ingredient?</string>
+    <string name="delete_ingredient_message">Are you sure you want to remove this ingredient from your pantry?</string>
+    <string name="delete">Delete</string>
+    <string name="ingredient_list_hint">Tap to edit • Hold to delete</string>
+
+    <!-- Measurement units -->
+    <string-array name="ingredient_units">
+        <item>pieces</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>L</item>
+    </string-array>
+
+
 </resources>

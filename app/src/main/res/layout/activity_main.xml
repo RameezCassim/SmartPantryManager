@@ -168,6 +168,28 @@
 
                 </LinearLayout>
 
+
+                <!-- Pantry ingredient list section -->
+                <LinearLayout
+                    android:id="@+id/pantryListContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvIngredientListHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/ingredient_list_hint"
+                    android:textColor="@color/pantry_muted"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
                 <!-- Primary Add Ingredient button -->
                 <Button
                     android:id="@+id/btnAddIngredient"
