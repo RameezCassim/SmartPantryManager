@@ -34,12 +34,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartpantrymanager.adapters.PantryAdapter;
 
 
+import com.example.smartpantrymanager.database.RecipeDao;
+import com.example.smartpantrymanager.database.RecipeSeeder;
+
 public class MainActivity extends AppCompatActivity {
 
     // Database access object
     private PantryDao pantryDao;
     private PantryAdapter pantryAdapter;
-
 
     // =====================================================
     // 1. ACTIVITY CREATION
@@ -59,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         // Initialize database access
         pantryDao = new PantryDao(this);
 
+        // Initialize the recipe seeder
+        RecipeSeeder recipeSeeder = new RecipeSeeder(this);
+
+        // Insert 20 predefined recipes if needed
+        recipeSeeder.seedRecipesIfNeeded();
 
         // Find RecyclerView in the XML layout
         RecyclerView recyclerViewPantry =
@@ -220,24 +227,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Show or hide the correct interface
         if (items.isEmpty()) {
-
             emptyPantryCard.setVisibility(View.VISIBLE);
-
             recyclerViewPantry.setVisibility(View.GONE);
-
             tvIngredientListHint.setVisibility(View.GONE);
-
         } else {
-
             emptyPantryCard.setVisibility(View.GONE);
-
             recyclerViewPantry.setVisibility(View.VISIBLE);
-
             tvIngredientListHint.setVisibility(View.VISIBLE);
         }
 
         // Send the latest ingredient records to the Adapter
         pantryAdapter.updateIngredients(items);
+
+        // Get the number of recipes saved in SQLite
+        RecipeDao recipeDao = new RecipeDao(this);
+
+        int recipeCount = recipeDao.getRecipeCount();
+
+        // Find the Recipes counter on the dashboard
+        TextView tvRecipeCount = findViewById(R.id.tvRecipeCount);
+
+        // Display the current recipe count
+        tvRecipeCount.setText(String.valueOf(recipeCount)
+        );
     }
 
 

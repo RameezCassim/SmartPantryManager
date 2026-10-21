@@ -82,6 +82,7 @@
 
             </LinearLayout>
 
+            <!-- RECIPES STATISTICS CARD -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,7 +93,9 @@
                 android:gravity="center"
                 android:background="@drawable/bg_card">
 
+                <!-- Recipe count -->
                 <TextView
+                    android:id="@+id/tvRecipeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -100,6 +103,7 @@
                     android:textSize="32sp"
                     android:textStyle="bold" />
 
+                <!-- Recipes label -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,8 +111,8 @@
                     android:text="Recipes"
                     android:textColor="@color/pantry_muted"
                     android:textSize="13sp" />
-
             </LinearLayout>
+
         </LinearLayout>
 
         <!-- SECTION TITLE -->
