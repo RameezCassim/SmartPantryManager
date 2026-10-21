@@ -10,7 +10,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.smartpantrymanager.database.PantryDao;
+
+
 public class MainActivity extends AppCompatActivity {
+
+    private PantryDao pantryDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Display the XML layout for this Activity
         setContentView(R.layout.activity_main);
+
+        // Prepare database access for this Activity
+        pantryDao = new PantryDao(this);
+
 
         // Hide the default ActionBar if the theme has one
         if (getSupportActionBar() != null) {
@@ -89,6 +102,37 @@ public class MainActivity extends AppCompatActivity {
         btnNavSettings.setOnClickListener(view -> {
             showMessage(R.string.message_settings);
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+
+        // Call the parent Activity's lifecycle method
+        super.onResume();
+
+        // Retrieve the actual number of pantry items
+        int ingredientCount = pantryDao.getCount();
+
+        // Find the ingredient counter on our dashboard
+        TextView tvIngredientCount =
+                findViewById(R.id.tvIngredientCount);
+
+        // Display the current number of saved ingredients
+        tvIngredientCount.setText(
+                String.valueOf(ingredientCount)
+        );
+
+        // Find the empty-pantry card
+        View emptyPantryCard =
+                findViewById(R.id.emptyPantryCard);
+
+        // Show the empty card only when no ingredients exist
+        if (ingredientCount == 0) {
+            emptyPantryCard.setVisibility(View.VISIBLE);
+        } else {
+            emptyPantryCard.setVisibility(View.GONE);
+        }
     }
 
     // Reusable method to display a short message
