@@ -17,6 +17,8 @@ import com.example.smartpantrymanager.models.PantryItem;
 import com.example.smartpantrymanager.models.Recipe;
 import com.example.smartpantrymanager.utils.RecipeMatcher;
 
+import android.content.Intent;
+
 import java.util.List;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
@@ -108,15 +110,20 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
 
         // Create RecyclerView Adapter
         adapter = new SuggestedRecipeAdapter(recipe -> {
-
-            // Recipe Details Activity will be added in Phase 7
-            Toast.makeText(
-                    this,
-                    "Recipe details coming in Phase 7: " +
-                            recipe.getName(),
-                    Toast.LENGTH_SHORT
-            ).show();
+            // Create an Intent to open the Recipe Details screen
+            Intent intent = new Intent(
+                    SuggestedRecipesActivity.this,
+                    RecipeDetailsActivity.class
+            );
+            // Send the selected recipe's database ID
+            intent.putExtra(
+                    RecipeDetailsActivity.EXTRA_RECIPE_ID,
+                    recipe.getId()
+            );
+            // Navigate to the details screen
+            startActivity(intent);
         });
+
 
         recyclerView.setAdapter(adapter);
 
