@@ -195,8 +195,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Settings bottom navigation
         btnNavSettings.setOnClickListener(view -> {
-            showMessage(R.string.message_settings);
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SettingsActivity.class
+            );
+            startActivity(intent);
         });
+
     }
 
     // =====================================================

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.smartpantrymanager.utils.ExpiryPreferences;
 import com.example.smartpantrymanager.R;
 import com.example.smartpantrymanager.models.PantryItem;
 
@@ -65,6 +65,28 @@ public class PantryAdapter
             int position) {
 
         PantryItem item = ingredients.get(position);
+
+
+        // Read the user's saved expiry preferences
+        ExpiryPreferences expiryPreferences =
+                new ExpiryPreferences(
+                        holder.itemView.getContext()
+                );
+
+        // Calculate the expiry warning for this ingredient
+        String warning = expiryPreferences.getExpiryWarning(
+                item.getExpiryDate()
+        );
+
+        // Show or hide the warning
+        if (warning != null) {
+            holder.tvExpiryWarning.setText(warning);
+            holder.tvExpiryWarning.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvExpiryWarning.setText("");
+            holder.tvExpiryWarning.setVisibility(View.GONE);
+        }
+
 
         // Display the ingredient name
         holder.tvName.setText(item.getName());
@@ -149,6 +171,9 @@ public class PantryAdapter
         TextView tvQuantity;
         TextView tvExpiry;
 
+        TextView tvExpiryWarning;
+
+
         public PantryViewHolder(@NonNull View itemView) {
 
             super(itemView);
@@ -158,6 +183,8 @@ public class PantryAdapter
             tvQuantity = itemView.findViewById(R.id.tvItemQuantity);
 
             tvExpiry = itemView.findViewById(R.id.tvItemExpiry);
+
+            tvExpiryWarning = itemView.findViewById(R.id.tvExpiryWarning);
         }
     }
 }

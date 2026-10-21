@@ -50,6 +50,18 @@
             android:textColor="@color/pantry_muted"
             android:textSize="13sp" />
 
+        <!-- Dynamic expiry warning -->
+        <TextView
+            android:id="@+id/tvExpiryWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Expiring soon"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#BE2D2D"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <!-- EDIT ARROW -->

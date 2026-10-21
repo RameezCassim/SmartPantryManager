@@ -23,6 +23,10 @@
             android:name=".AddEditIngredientActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+
         <!-- MAIN ACTIVITY -->
         <activity
             android:name=".MainActivity"
