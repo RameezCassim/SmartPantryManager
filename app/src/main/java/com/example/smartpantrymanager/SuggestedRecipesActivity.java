@@ -21,6 +21,12 @@ import java.util.List;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
 
+
+    public static final String EXTRA_SHOW_ALL_RECIPES =
+            "com.example.smartpantrymanager.SHOW_ALL_RECIPES";
+
+    private boolean showAllRecipes = false;
+
     private PantryDao pantryDao;
     private RecipeDao recipeDao;
     private SuggestedRecipeAdapter adapter;
@@ -35,6 +41,40 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_suggested_recipes);
+
+
+// Check whether the user opened Explore Recipes
+        showAllRecipes = getIntent().getBooleanExtra(
+                EXTRA_SHOW_ALL_RECIPES,
+                false
+        );
+
+// Update the header for the selected mode
+        TextView screenTitle = findViewById(
+                R.id.tvRecipeScreenTitle
+        );
+
+        TextView screenSubtitle = findViewById(
+                R.id.tvRecipeScreenSubtitle
+        );
+
+        if (showAllRecipes) {
+
+            screenTitle.setText("Explore All Recipes");
+
+            screenSubtitle.setText(
+                    "Browse every recipe and see what ingredients you need."
+            );
+
+        } else {
+
+            screenTitle.setText("Suggested Recipes");
+
+            screenSubtitle.setText(
+                    "Recipes you can cook with your current pantry."
+            );
+        }
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -95,47 +135,66 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
     }
 
     // Retrieve the pantry and calculate strict matches
+
     private void refreshSuggestions() {
 
-        // Read all available pantry ingredients
-        List<PantryItem> pantryItems =
-                pantryDao.getAll();
+        // Read the latest pantry data
+        List<PantryItem> pantryItems = pantryDao.getAll();
 
-        // Read all stored recipes and their requirements
-        List<Recipe> allRecipes =
-                recipeDao.getAllRecipes();
+        // Retrieve all 20 recipes from SQLite
+        List<Recipe> allRecipes = recipeDao.getAllRecipes();
 
-        // Include only recipes whose every requirement is met
+        // Calculate strictly available recipes
         List<Recipe> matchingRecipes =
                 RecipeMatcher.findMatchingRecipes(
                         allRecipes,
                         pantryItems
                 );
 
-        int matchingCount = matchingRecipes.size();
+        // Choose which collection to show
+        List<Recipe> displayedRecipes;
 
-        // Update the results heading
-        tvMatchingCount.setText(
-                matchingCount == 1
-                        ? "1 recipe available"
-                        : matchingCount + " recipes available"
-        );
+        if (showAllRecipes) {
 
-        // Show a helpful message if nothing matches
-        if (matchingRecipes.isEmpty()) {
+            // Explore mode: show every recipe
+            displayedRecipes = allRecipes;
+
+            tvMatchingCount.setText(
+                    "All Recipes (" + allRecipes.size() + ")" +
+                            " • " + matchingRecipes.size() + " cookable"
+            );
+
+        } else {
+
+            // Suggested mode: only strict matches
+            displayedRecipes = matchingRecipes;
+
+            int count = matchingRecipes.size();
+
+            tvMatchingCount.setText(
+                    count == 1
+                            ? "1 recipe available"
+                            : count + " recipes available"
+            );
+        }
+
+        // Show empty state only when the displayed list is empty
+        if (displayedRecipes.isEmpty()) {
 
             emptyRecipesState.setVisibility(View.VISIBLE);
-
             recyclerView.setVisibility(View.GONE);
 
         } else {
 
             emptyRecipesState.setVisibility(View.GONE);
-
             recyclerView.setVisibility(View.VISIBLE);
         }
 
-        // Display only strictly matching recipes
-        adapter.updateRecipes(matchingRecipes);
+        // Supply both recipes and pantry data for status messages
+        adapter.updateRecipes(
+                displayedRecipes,
+                pantryItems
+        );
     }
+
 }

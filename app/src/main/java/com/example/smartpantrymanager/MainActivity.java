@@ -165,23 +165,32 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this,
                     SuggestedRecipesActivity.class
             );
+
+            // Explore mode: display all 20 recipes
+            intent.putExtra(
+                    SuggestedRecipesActivity.EXTRA_SHOW_ALL_RECIPES,
+                    true
+            );
             startActivity(intent);
         });
 
 
-        // Pantry bottom navigation
-        btnNavPantry.setOnClickListener(view -> {
-            showMessage(R.string.message_pantry);
-        });
 
-        // Recipes bottom navigation
+        // Pantry bottom navigation
         btnNavRecipes.setOnClickListener(view -> {
             Intent intent = new Intent(
                     MainActivity.this,
                     SuggestedRecipesActivity.class
             );
+
+            // Suggested mode: only recipes that can be cooked
+            intent.putExtra(
+                    SuggestedRecipesActivity.EXTRA_SHOW_ALL_RECIPES,
+                    false
+            );
             startActivity(intent);
         });
+
 
 
         // Settings bottom navigation

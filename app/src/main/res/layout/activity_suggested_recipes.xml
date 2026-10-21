@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Suggested Recipes"
+            android:id="@+id/tvRecipeScreenTitle"
             android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="@color/pantry_white" />
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Recipes you can make with ingredients you already have."
+            android:id="@+id/tvRecipeScreenSubtitle"
             android:textSize="14sp"
             android:textColor="@color/pantry_white" />
     </LinearLayout>

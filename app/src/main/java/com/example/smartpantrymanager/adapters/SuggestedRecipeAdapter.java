@@ -14,15 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartpantrymanager.R;
 import com.example.smartpantrymanager.models.Recipe;
 
+import android.graphics.Color;
+import com.example.smartpantrymanager.models.PantryItem;
+import com.example.smartpantrymanager.utils.RecipeMatcher;
+
 // Java collection classes
 import java.util.ArrayList;
 import java.util.List;
 
-public class SuggestedRecipeAdapter
-        extends RecyclerView.Adapter<SuggestedRecipeAdapter.RecipeViewHolder> {
+public class SuggestedRecipeAdapter extends RecyclerView.Adapter<SuggestedRecipeAdapter.RecipeViewHolder> {
 
     // Stores only recipes that passed strict matching
     private final List<Recipe> recipes = new ArrayList<>();
+    private final List<PantryItem> pantryItems = new ArrayList<>();
 
     // Interface used to communicate recipe clicks to the Activity
     public interface OnRecipeClickListener {
@@ -93,6 +97,39 @@ public class SuggestedRecipeAdapter
         // Handle clicks on the recipe card
         holder.itemView.setOnClickListener(view -> {
 
+// Calculate what the user is missing for this recipe
+            List<String> shortages = RecipeMatcher.getShortages(
+                    recipe,
+                    pantryItems
+            );
+
+            if (shortages.isEmpty()) {
+
+                // All requirements are satisfied
+                holder.tvAvailability.setText(
+                        "You have everything needed!"
+                );
+
+                holder.tvAvailability.setTextColor(
+                        androidx.core.content.ContextCompat.getColor(
+                                holder.itemView.getContext(),
+                                R.color.pantry_green_dark
+                        )
+                );
+
+            } else {
+
+                // Show every missing or insufficient ingredient
+                holder.tvAvailability.setText(
+                        android.text.TextUtils.join("\n", shortages)
+                );
+
+                holder.tvAvailability.setTextColor(
+                        Color.rgb(190, 45, 45)
+                );
+            }
+
+
             // Inform the Activity which recipe was selected
             if (listener != null) {
                 listener.onRecipeClick(recipe);
@@ -115,19 +152,28 @@ public class SuggestedRecipeAdapter
     // =====================================================
 
     @SuppressWarnings("NotifyDataSetChanged")
-    public void updateRecipes(List<Recipe> newRecipes) {
+    public void updateRecipes(
+            List<Recipe> newRecipes,
+            List<PantryItem> currentPantry) {
 
-        // Remove previously displayed recipes
+        // Clear the previous data
         recipes.clear();
+        pantryItems.clear();
 
-        // Add the latest strictly matching recipes
+        // Load the recipes to display
         if (newRecipes != null) {
             recipes.addAll(newRecipes);
         }
 
-        // Notify RecyclerView that its data has changed
+        // Load the latest pantry quantities
+        if (currentPantry != null) {
+            pantryItems.addAll(currentPantry);
+        }
+
+        // Refresh RecyclerView
         notifyDataSetChanged();
     }
+
 
     // =====================================================
     // 5. RECIPE VIEW HOLDER
@@ -139,6 +185,9 @@ public class SuggestedRecipeAdapter
         // Recipe card TextViews
         final TextView tvName;
         final TextView tvIngredients;
+
+        final TextView tvAvailability;
+
 
         // Constructor
         public RecipeViewHolder(@NonNull View itemView) {
@@ -154,6 +203,11 @@ public class SuggestedRecipeAdapter
             tvIngredients = itemView.findViewById(
                     R.id.tvSuggestedRecipeIngredients
             );
+
+            tvAvailability = itemView.findViewById(
+                    R.id.tvRecipeAvailability
+            );
+
         }
     }
 }
