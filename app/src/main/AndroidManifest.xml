@@ -9,6 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartPantryManager">
 
+
+        <activity
+            android:name=".SuggestedRecipesActivity"
+            android:exported="false" />
+
         <!-- ADD / EDIT INGREDIENT ACTIVITY -->
         <activity
             android:name=".AddEditIngredientActivity"
@@ -26,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
+
 
         </activity>
 

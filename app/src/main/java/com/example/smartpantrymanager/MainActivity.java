@@ -161,8 +161,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Explore Recipes button
         btnExploreRecipes.setOnClickListener(view -> {
-            showMessage(R.string.message_recipes);
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SuggestedRecipesActivity.class
+            );
+            startActivity(intent);
         });
+
 
         // Pantry bottom navigation
         btnNavPantry.setOnClickListener(view -> {
@@ -171,8 +176,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Recipes bottom navigation
         btnNavRecipes.setOnClickListener(view -> {
-            showMessage(R.string.message_recipes);
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SuggestedRecipesActivity.class
+            );
+            startActivity(intent);
         });
+
 
         // Settings bottom navigation
         btnNavSettings.setOnClickListener(view -> {

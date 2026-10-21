@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/suggestedRecipesRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/pantry_background">
+
+    <!-- Screen header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="22dp"
+        android:background="@drawable/bg_header">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suggested Recipes"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/pantry_white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Recipes you can make with ingredients you already have."
+            android:textSize="14sp"
+            android:textColor="@color/pantry_white" />
+    </LinearLayout>
+
+    <!-- Number of matching recipes -->
+    <TextView
+        android:id="@+id/tvMatchingCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="0 recipes available"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/pantry_text" />
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/emptyRecipesState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:background="@drawable/bg_card">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No recipes match your pantry yet"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textColor="@color/pantry_text"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Add more ingredients to discover recipes you can cook."
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/pantry_muted" />
+    </LinearLayout>
+
+    <!-- Only eligible recipes appear here -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSuggestedRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:visibility="gone" />
+
+    <!-- Return to pantry -->
+    <Button
+        android:id="@+id/btnBackToPantry"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:text="Back to My Pantry"
+        android:textAllCaps="false" />
+
+</LinearLayout>
