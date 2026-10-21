@@ -1,0 +1,86 @@
+# ==================================================
+# 1. ANDROID STUDIO CONFIGURATION
+# ==================================================
+
+# Ignore local Android Studio settings
+.idea/
+
+# Ignore IntelliJ module files
+*.iml
+
+# ==================================================
+# 2. GRADLE CACHE AND GENERATED FILES
+# ==================================================
+# Ignore Gradle cache
+.gradle/
+
+# Ignore generated build directories
+**/build/
+
+# Ignore local Gradle configuration overrides
+gradle-local.properties
+
+# ==================================================
+# 3. LOCAL MACHINE CONFIGURATION
+# ==================================================
+# Ignore local Android SDK paths
+local.properties
+
+# ==================================================
+# 4. API KEYS, PASSWORDS AND SECRETS
+# ==================================================
+# Environment variable files
+.env
+.env.*
+
+# Allow sample environment configuration
+!.env.example
+
+# Private configuration files
+key.properties
+secrets.properties
+
+# Private signing and certificate files
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+
+# ==================================================
+# 5. ANDROID BUILD OUTPUTS
+# ==================================================
+# Compiled Android applications
+*.apk
+*.aab
+
+# Android temporary files
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ==================================================
+# 6. OPERATING SYSTEM FILES
+# ==================================================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# ==================================================
+# 7. LOGS AND TEMPORARY FILES
+# ==================================================
+*.log
+*.tmp
+*.temp
+*.hprof
+
+# ==================================================
+# 8. SQLITE TEMPORARY DATABASE FILES
+# ==================================================
+# SQLite journal and temporary files
+*.db-journal
+*.db-wal
+*.db-shm

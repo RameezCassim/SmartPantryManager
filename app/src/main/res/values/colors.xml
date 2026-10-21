@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Main green used for important actions -->
+    <color name="pantry_green">#299D72</color>
+    <!-- Dark green used for contrast -->
+    <color name="pantry_green_dark">#157B58</color>
+    <!-- Soft green for decorative backgrounds -->
+    <color name="pantry_mint">#DFF4E7</color>
+    <!-- Application background -->
+    <color name="pantry_background">#F7FAF8</color>
+    <!-- Main text colour -->
+    <color name="pantry_text">#203D31</color>
+    <!-- Secondary text colour -->
+    <color name="pantry_muted">#657E72</color>
+    <!-- Card borders -->
+    <color name="pantry_border">#D8EAE0</color>
+    <!-- White elements -->
+    <color name="pantry_white">#FFFFFF</color>
+
+</resources>
