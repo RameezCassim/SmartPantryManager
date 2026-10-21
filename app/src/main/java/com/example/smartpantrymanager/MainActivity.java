@@ -27,10 +27,19 @@ import com.example.smartpantrymanager.models.PantryItem;
 // Java utilities
 import java.util.List;
 
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.smartpantrymanager.adapters.PantryAdapter;
+
+
 public class MainActivity extends AppCompatActivity {
 
     // Database access object
     private PantryDao pantryDao;
+    private PantryAdapter pantryAdapter;
+
 
     // =====================================================
     // 1. ACTIVITY CREATION
@@ -49,6 +58,40 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize database access
         pantryDao = new PantryDao(this);
+
+
+        // Find RecyclerView in the XML layout
+        RecyclerView recyclerViewPantry =
+                findViewById(R.id.recyclerViewPantry);
+
+        // Arrange ingredients vertically
+        recyclerViewPantry.setLayoutManager(
+                new LinearLayoutManager(this)
+        );
+
+        // Create the Adapter and handle ingredient interactions
+        pantryAdapter = new PantryAdapter(
+                new PantryAdapter.OnIngredientActionListener() {
+
+                    @Override
+                    public void onIngredientClick(PantryItem item) {
+
+                        // Open the selected ingredient for editing
+                        openEditIngredient(item.getId());
+                    }
+
+                    @Override
+                    public void onIngredientLongClick(PantryItem item) {
+
+                        // Ask for confirmation before deleting
+                        showDeleteConfirmation(item);
+                    }
+                }
+        );
+
+        // Connect the Adapter to RecyclerView
+        recyclerViewPantry.setAdapter(pantryAdapter);
+
 
         // Hide the default ActionBar
         if (getSupportActionBar() != null) {
@@ -147,183 +190,62 @@ public class MainActivity extends AppCompatActivity {
     // 3. REFRESH PANTRY INFORMATION
     // =====================================================
 
+
     private void refreshPantry() {
 
-        // Retrieve the current number of ingredients
-        int ingredientCount = pantryDao.getCount();
+        // Retrieve all pantry ingredients from SQLite
+        List<PantryItem> items = pantryDao.getAll();
 
-        // Find the ingredient counter
+        // Update the ingredient count
+        int ingredientCount = items.size();
+
         TextView tvIngredientCount =
                 findViewById(R.id.tvIngredientCount);
 
-        // Update the counter
         tvIngredientCount.setText(
                 String.valueOf(ingredientCount)
         );
 
-        // Find the empty pantry card
+        // Find the empty-pantry information card
         View emptyPantryCard =
                 findViewById(R.id.emptyPantryCard);
 
-        // Find the ingredient list container
-        LinearLayout pantryListContainer =
-                findViewById(R.id.pantryListContainer);
+        // Find RecyclerView
+        RecyclerView recyclerViewPantry =
+                findViewById(R.id.recyclerViewPantry);
 
         // Find the list instructions
         TextView tvIngredientListHint =
                 findViewById(R.id.tvIngredientListHint);
 
-        // Check whether the pantry contains ingredients
-        if (ingredientCount == 0) {
+        // Show or hide the correct interface
+        if (items.isEmpty()) {
 
-            // Show the empty pantry message
             emptyPantryCard.setVisibility(View.VISIBLE);
 
-            // Hide the ingredient list
-            pantryListContainer.setVisibility(View.GONE);
+            recyclerViewPantry.setVisibility(View.GONE);
 
-            // Hide the list instructions
             tvIngredientListHint.setVisibility(View.GONE);
 
         } else {
 
-            // Hide the empty pantry message
             emptyPantryCard.setVisibility(View.GONE);
 
-            // Show the ingredient list
-            pantryListContainer.setVisibility(View.VISIBLE);
+            recyclerViewPantry.setVisibility(View.VISIBLE);
 
-            // Show the list instructions
             tvIngredientListHint.setVisibility(View.VISIBLE);
         }
 
-        // Update the displayed ingredient cards
-        displayPantryItems();
+        // Send the latest ingredient records to the Adapter
+        pantryAdapter.updateIngredients(items);
     }
+
 
     // =====================================================
     // 4. DISPLAY PANTRY INGREDIENTS
     // =====================================================
 
-    private void displayPantryItems() {
 
-        // Retrieve ingredients from SQLite
-        List<PantryItem> items = pantryDao.getAll();
-
-        // Find the container for ingredient cards
-        LinearLayout container =
-                findViewById(R.id.pantryListContainer);
-
-        // Remove old cards before loading new ones
-        container.removeAllViews();
-
-        // Loop through each ingredient
-        for (PantryItem item : items) {
-
-            // Create a TextView for the ingredient
-            TextView ingredientCard = new TextView(this);
-
-            // Format the ingredient quantity
-            String quantityText =
-                    String.valueOf(item.getQuantity());
-
-            // Remove .0 from whole numbers
-            if (item.getQuantity() == Math.floor(item.getQuantity())
-                    && item.getQuantity() <= Long.MAX_VALUE) {
-
-                quantityText = String.valueOf(
-                        (long) item.getQuantity()
-                );
-            }
-
-            // Create the ingredient display text
-            String ingredientText =
-                    item.getName() + "\n" +
-                            quantityText + " " +
-                            item.getUnit();
-
-            // Include expiry date if available
-            if (item.getExpiryDate() != null &&
-                    !item.getExpiryDate().isEmpty()) {
-
-                ingredientText +=
-                        "\nExpiry: " + item.getExpiryDate();
-            }
-
-            // Set the card text
-            ingredientCard.setText(ingredientText);
-
-            // Set text appearance
-            ingredientCard.setTextSize(16);
-
-            ingredientCard.setTextColor(
-                    getResources().getColor(
-                            R.color.pantry_text,
-                            getTheme()
-                    )
-            );
-
-            ingredientCard.setGravity(
-                    Gravity.CENTER_VERTICAL
-            );
-
-            // Set card padding using dp
-            int cardPadding = dpToPx(20);
-
-            ingredientCard.setPadding(
-                    cardPadding,
-                    cardPadding,
-                    cardPadding,
-                    cardPadding
-            );
-
-            // Apply rounded card background
-            ingredientCard.setBackgroundResource(
-                    R.drawable.bg_card
-            );
-
-            // Apply small elevation
-            ingredientCard.setElevation(dpToPx(3));
-
-            // Set layout dimensions
-            LinearLayout.LayoutParams params =
-                    new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-
-            // Add spacing below each card
-            params.setMargins(
-                    0,
-                    0,
-                    0,
-                    dpToPx(12)
-            );
-
-            ingredientCard.setLayoutParams(params);
-
-            // Make the card clickable
-            ingredientCard.setClickable(true);
-            ingredientCard.setLongClickable(true);
-
-            // Tap an ingredient to edit it
-            ingredientCard.setOnClickListener(view -> {
-
-                openEditIngredient(item.getId());
-            });
-
-            // Long-press an ingredient to delete it
-            ingredientCard.setOnLongClickListener(view -> {
-
-                showDeleteConfirmation(item);
-
-                return true;
-            });
-
-            // Add the card to the list container
-            container.addView(ingredientCard);
-        }
-    }
 
     // =====================================================
     // 5. OPEN EDIT INGREDIENT SCREEN

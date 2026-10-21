@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/addEditRoot"
@@ -14,17 +13,17 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Screen title -->
+        <!-- FORM TITLE -->
         <TextView
             android:id="@+id/tvFormTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_ingredient_title"
             android:textColor="@color/pantry_green_dark"
-            android:textSize="27sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
-        <!-- Subtitle -->
+        <!-- SUBTITLE -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,16 +32,17 @@
             android:textColor="@color/pantry_muted"
             android:textSize="14sp" />
 
-        <!-- Ingredient name -->
+        <!-- INGREDIENT NAME LABEL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:text="@string/ingredient_name_label"
             android:textColor="@color/pantry_text"
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- INGREDIENT NAME INPUT -->
         <EditText
             android:id="@+id/etIngredientName"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:textColorHint="@color/pantry_muted"
             android:textSize="16sp" />
 
-        <!-- Quantity -->
+        <!-- QUANTITY LABEL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +67,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- QUANTITY INPUT -->
         <EditText
             android:id="@+id/etQuantity"
             android:layout_width="match_parent"
@@ -81,7 +82,7 @@
             android:textColorHint="@color/pantry_muted"
             android:textSize="16sp" />
 
-        <!-- Measurement unit -->
+        <!-- MEASUREMENT UNIT LABEL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,6 +92,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- MEASUREMENT UNIT DROPDOWN -->
         <Spinner
             android:id="@+id/spinnerUnit"
             android:layout_width="match_parent"
@@ -100,7 +102,7 @@
             android:background="@drawable/bg_card"
             android:entries="@array/ingredient_units" />
 
-        <!-- Expiry date -->
+        <!-- EXPIRY DATE LABEL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,6 +112,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!-- SELECTED EXPIRY DATE -->
         <TextView
             android:id="@+id/tvExpiryDate"
             android:layout_width="match_parent"
@@ -121,6 +124,7 @@
             android:textColor="@color/pantry_muted"
             android:textSize="16sp" />
 
+        <!-- SELECT EXPIRY DATE BUTTON -->
         <Button
             android:id="@+id/btnSelectDate"
             android:layout_width="match_parent"
@@ -132,6 +136,7 @@
             android:textAllCaps="false"
             android:textColor="@color/pantry_green_dark" />
 
+        <!-- CLEAR EXPIRY DATE BUTTON -->
         <Button
             android:id="@+id/btnClearDate"
             android:layout_width="match_parent"
@@ -140,7 +145,7 @@
             android:text="@string/clear_expiry"
             android:textAllCaps="false" />
 
-        <!-- Save button -->
+        <!-- SAVE INGREDIENT BUTTON -->
         <Button
             android:id="@+id/btnSaveIngredient"
             android:layout_width="match_parent"
@@ -154,7 +159,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Cancel button -->
+        <!-- CANCEL BUTTON -->
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"

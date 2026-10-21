@@ -1,68 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Application identity -->
+
+    <!-- APPLICATION -->
     <string name="app_name">Smart Pantry Manager</string>
 
-    <!-- Header -->
-    <string name="header_kicker">SMART PANTRY</string>
-    <string name="header_title">Make more with what you have.</string>
-    <string name="header_subtitle">Track your ingredients, reduce food waste and discover recipes.</string>
+    <!-- MAIN SCREEN -->
+    <string name="message_add">Open Add Ingredient</string>
+    <string name="message_recipes">Recipes screen coming soon.</string>
+    <string name="message_pantry">You are viewing My Pantry.</string>
+    <string name="message_settings">Settings screen coming soon.</string>
 
-    <!-- Pantry section -->
-    <string name="pantry_title">My Pantry</string>
-    <string name="pantry_subtitle">Everything in your kitchen, in one place.</string>
-    <string name="initial_pantry_count">0</string>
-    <string name="pantry_count_label">Ingredients saved</string>
-    <string name="pantry_count_hint">Your pantry inventory</string>
-
-    <!-- Empty pantry card -->
-    <string name="empty_pantry_icon">🌱</string>
-    <string name="empty_pantry_title">Your pantry is empty</string>
-    <string name="empty_pantry_message">Add your first ingredient to start tracking what you have at home.</string>
-
-    <!-- Actions -->
-    <string name="add_ingredient">+ Add Ingredient</string>
-    <string name="explore_recipes">Explore Recipes</string>
-
-    <!-- Bottom navigation -->
-    <string name="nav_pantry">Pantry</string>
-    <string name="nav_recipes">Recipes</string>
-    <string name="nav_settings">Settings</string>
-
-    <!-- Temporary development messages -->
-    <string name="message_pantry">You are already viewing My Pantry.</string>
-    <string name="message_add">The Add Ingredient screen will be implemented in Phase 4.</string>
-    <string name="message_recipes">Recipe suggestions will be implemented in Phase 7.</string>
-    <string name="message_settings">Settings will be implemented in Phase 9.</string>
-
-    <!-- Stage 4 -->
-    <!-- Ingredient form -->
+    <!-- INGREDIENT FORM -->
     <string name="add_ingredient_title">Add Ingredient</string>
     <string name="edit_ingredient_title">Edit Ingredient</string>
     <string name="ingredient_form_subtitle">Keep your pantry up to date.</string>
 
+    <!-- INGREDIENT NAME -->
     <string name="ingredient_name_label">Ingredient Name</string>
     <string name="ingredient_name_hint">e.g. Eggs</string>
 
+    <!-- QUANTITY -->
     <string name="quantity_label">Quantity</string>
     <string name="quantity_hint">e.g. 6</string>
 
+    <!-- MEASUREMENT UNIT -->
     <string name="unit_label">Measurement Unit</string>
 
-    <string name="expiry_label">Expiry Date (Optional)</string>
-    <string name="select_expiry">Select Expiry Date</string>
-    <string name="clear_expiry">Clear Date</string>
-
-    <string name="save_ingredient">Save Ingredient</string>
-    <string name="update_ingredient">Update Ingredient</string>
-    <string name="cancel">Cancel</string>
-
-    <!-- Ingredient list -->
-    <string name="delete_ingredient_title">Delete Ingredient?</string>
-    <string name="delete_ingredient_message">Are you sure you want to remove this ingredient from your pantry?</string>
-    <string name="delete">Delete</string>
-    <string name="ingredient_list_hint">Tap to edit • Hold to delete</string>
-
-    <!-- Measurement units -->
     <string-array name="ingredient_units">
         <item>pieces</item>
         <item>g</item>
@@ -71,5 +34,22 @@
         <item>L</item>
     </string-array>
 
+    <!-- EXPIRY DATE -->
+    <string name="expiry_label">Expiry Date (Optional)</string>
+    <string name="select_expiry">Select Expiry Date</string>
+    <string name="clear_expiry">Clear Date</string>
+
+    <!-- BUTTON LABELS -->
+    <string name="save_ingredient">Save Ingredient</string>
+    <string name="update_ingredient">Update Ingredient</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <!-- DELETE CONFIRMATION -->
+    <string name="delete_ingredient_title">Delete Ingredient?</string>
+    <string name="delete_ingredient_message">Are you sure you want to remove this ingredient from your pantry?</string>
+
+    <!-- INGREDIENT LIST -->
+    <string name="ingredient_list_hint">Tap to edit • Hold to delete</string>
 
 </resources>
