@@ -19,5 +19,8 @@
     <color name="pantry_border">#D8EAE0</color>
     <!-- White elements -->
     <color name="pantry_white">#FFFFFF</color>
+    <!-- App image splash background-->
+    <color name="pantry_splash_background">#173D31</color>
+
 
 </resources>

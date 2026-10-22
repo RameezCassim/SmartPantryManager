@@ -4,6 +4,7 @@ package com.example.smartpantrymanager;
 // Android imports
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -37,6 +38,7 @@ import com.example.smartpantrymanager.adapters.PantryAdapter;
 import com.example.smartpantrymanager.database.RecipeDao;
 import com.example.smartpantrymanager.database.RecipeSeeder;
 
+
 public class MainActivity extends AppCompatActivity {
 
     // Database access object
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Load the My Pantry interface
         setContentView(R.layout.activity_main);
+        Log.i("SmartPantryStartup", "MainActivity layout inflated successfully");
 
         // Initialize database access
         pantryDao = new PantryDao(this);
@@ -212,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
+        Log.i("SmartPantryStartup", "MainActivity resumed");
 
         // Refresh pantry information from SQLite
         refreshPantry();
@@ -262,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Send the latest ingredient records to the Adapter
         pantryAdapter.updateIngredients(items);
+        Log.i("SmartPantryStartup", "Pantry refreshed, ingredient count=" + items.size());
 
         // Get the number of recipes saved in SQLite
         RecipeDao recipeDao = new RecipeDao(this);

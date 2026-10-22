@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.material)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    //implementation("androidx.core:core-splashscreen:1.0.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

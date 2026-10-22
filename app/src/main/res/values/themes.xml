@@ -1,8 +1,14 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.SmartPantryManager" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Keep the application's UI light even if the emulator uses dark mode. -->
+    <style name="Base.Theme.SmartPantryManager" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/pantry_background</item>
+        <item name="android:statusBarColor">@color/pantry_background</item>
+        <item name="android:navigationBarColor">@color/pantry_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="colorPrimary">@color/pantry_green_dark</item>
+        <item name="colorOnPrimary">@color/pantry_white</item>
     </style>
 
     <style name="Theme.SmartPantryManager" parent="Base.Theme.SmartPantryManager" />
