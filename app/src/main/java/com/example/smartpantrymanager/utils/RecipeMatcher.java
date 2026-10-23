@@ -18,7 +18,6 @@ public class RecipeMatcher {
 
     // Normalize common ingredient-name variations
     public static String normalizeName(String name) {
-
         if (name == null) {
             return "";
         }
@@ -26,7 +25,6 @@ public class RecipeMatcher {
         String result = name.trim()
                 .toLowerCase(Locale.ROOT)
                 .replaceAll("\\s+", " ");
-
         switch (result) {
             case "tomatoes": return "tomato";
             case "potatoes": return "potato";
